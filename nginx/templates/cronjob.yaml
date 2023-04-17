@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: nginx-cronjob
+  namespace: ns-{{ .Values.package_ns }}
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: nginx
+              image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+              command:
+                - /bin/sh
+                - -c
+                - nginx -t
+          restartPolicy: OnFailure
