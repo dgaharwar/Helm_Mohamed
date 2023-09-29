@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: nginx-cronjob
-  namespace: ns-{{ .Values.package_ns }}
+  namespace: dg-nginx
 spec:
   schedule: "*/5 * * * *"
   jobTemplate:
